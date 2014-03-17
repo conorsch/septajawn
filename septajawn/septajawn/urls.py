@@ -11,8 +11,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', TemplateView.as_view(template_name='home.html')),
-    url(r'^whereami/', TemplateView.as_view(template_name='map.html')),
-    url(r'^whereami2/', septajawn.findme.views.getLocation),
+    url(r'^whereami/', septajawn.findme.views.getLocation),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

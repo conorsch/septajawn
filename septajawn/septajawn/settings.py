@@ -133,6 +133,7 @@ INSTALLED_APPS = (
 )
 
 GEOIP_LOCATION = '/vagrant/septajawn/septajawn/geodata'
+GEOIP_PATH = '/vagrant/septajawn/septajawn/geodata'
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 
 # A sample logging configuration. The only tangible logging
