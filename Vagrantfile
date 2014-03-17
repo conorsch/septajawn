@@ -9,11 +9,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define :djangobox do |t|
   end
 
-  #config.vm.box = "saucy64"
   # Canonical builds nightly Vagrant images for Ubuntu: http://cloud-images.ubuntu.com/vagrant/
-  #config.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/saucy/current/saucy-server-cloudimg-amd64-vagrant-disk1.box"
-  config.vm.box = "raring64"
-  config.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/raring/current/raring-server-cloudimg-amd64-vagrant-disk1.box"
+  # Still using 12.04 LTS, since 14.04 LTS isn't ready yet.
+  config.vm.box = "precise64"
+  config.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box"
 
   config.vm.network :forwarded_port, guest: 8000, host: 8000
   config.vm.network :private_network, ip: "192.168.33.33"
