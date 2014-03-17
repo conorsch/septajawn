@@ -1,0 +1,7 @@
+[
+  "vagrant-lxc",
+  "vagrant-aws",
+  "vagrant-cachier",
+  "vagrant-librarian-chef",
+  "vagrant-pristine"
+]
