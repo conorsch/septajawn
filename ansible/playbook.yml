@@ -17,16 +17,12 @@
       with_items:
         - build-essential
         - git
-        - tree
-        - vim
-        - curl
-        - zip
         - rsync
-        - wget
+        - htop
         - python-pip 
         - python-dev 
         - libpq-dev
-        - geoip
+        - geoip-bin
         - python-geoip
         - libgeoip-dev
 
