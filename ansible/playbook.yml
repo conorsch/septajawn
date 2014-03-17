@@ -38,11 +38,12 @@
       with_items:
               - django-toolbelt
               - django-bootstrap-form
+              - django-frontend-skeleton
               - south
               - virtualenv
 
     - name: create virtualenv
-      command: "virtualenv /vagrant/{{ project_name }}/venv"
+      command: "virtualenv --system-site-packages /vagrant/{{ project_name }}/venv"
 
     - name: activate virtualenv
       command: "source /vagrant/{{ project_name }}/venv/bin/activate"
