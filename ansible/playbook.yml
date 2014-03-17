@@ -39,6 +39,9 @@
               - virtualenv
               - geoip
 
+    - name: collect Django static files
+      command: "python /vagrant/{{ project_name }}/manage.py collectstatic --noinput"
+
 #    - name: create virtualenv
 #      command: "virtualenv --system-site-packages /vagrant/{{ project_name }}/venv"
 #
