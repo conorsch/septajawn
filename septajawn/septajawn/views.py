@@ -7,15 +7,14 @@ class MapView(TemplateView):
     def __init__(self, sth):
         pass
 
-     def get(self, request):
-         # <view logic>
+    def get(self, request):
         g = GeoIP()
         ip = request.META.get('REMOTE_ADDR', None)
         if ip:
             city = g.city(ip)['city']
         else:
             city = 'Rome' # default city
-         return HttpResponse("You are in the fair city of: " + city)
+        return HttpResponse("You are in the fair city of: " + city)
 
 class HomeView(TemplateView):
     template_name = "home.html"
