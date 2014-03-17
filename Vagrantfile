@@ -67,23 +67,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   end
 
-  # config.vm.synced_folder "../data", "/vagrant_data"
-
-
-
-  $get_django_packages = <<SCRIPT
-  aptitude install -y python-pip python-dev libpq-dev
-
-  locale-gen en_US.UTF-8
-
-  pip install -r /vagrant/requirements.txt
-
-  echo "Running django server: http://127.0.0.1:8000"
-  sudo -u vagrant /vagrant/supersonic/manage.py runserver 0.0.0.0:8000 &
-
-
-SCRIPT
-
   config.vm.provision :ansible do |ansible|
      ansible.playbook = "ansible/playbook.yml"
      ansible.inventory_file = "ansible/hosts" 
