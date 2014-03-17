@@ -39,11 +39,11 @@
               - virtualenv
               - geoip
 
-    - name: create virtualenv
-      command: "virtualenv --system-site-packages /vagrant/{{ project_name }}/venv"
-
-    - name: activate virtualenv
-      command: "source /vagrant/{{ project_name }}/venv/bin/activate"
+#    - name: create virtualenv
+#      command: "virtualenv --system-site-packages /vagrant/{{ project_name }}/venv"
+#
+#    - name: activate virtualenv
+#      command: "source /vagrant/{{ project_name }}/venv/bin/activate"
 
     - name: start django server
       command: "python /vagrant/{{ project_name }}/manage.py runserver 0.0.0.0:8000 &"
