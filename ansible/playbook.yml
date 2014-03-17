@@ -25,6 +25,8 @@
         - geoip-bin
         - python-geoip
         - libgeoip-dev
+        - binutils
+        - python-gdal
 
     - name: install django and supporting packages
       command: "pip install {{ item }}"
