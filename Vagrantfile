@@ -6,7 +6,7 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Silly but effective syntax for declaring box hostname
-  config.vm.define :djangobox do |t|
+  config.vm.define :septajawn do |t|
   end
 
   # Canonical builds nightly Vagrant images for Ubuntu: http://cloud-images.ubuntu.com/vagrant/
