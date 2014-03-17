@@ -45,5 +45,6 @@
 #    - name: activate virtualenv
 #      command: "source /vagrant/{{ project_name }}/venv/bin/activate"
 
-    - name: start django server
-      command: "python /vagrant/{{ project_name }}/manage.py runserver 0.0.0.0:8000 &"
+#    - name: start django server
+#      command: "python /vagrant/{{ project_name }}/manage.py runserver 0.0.0.0:8000"
+#      command: "python /vagrant/{{ project_name }}/manage.py runserver [::]:8000"
