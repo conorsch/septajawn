@@ -8,7 +8,7 @@ from django.views.generic import TemplateView
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', TemplateView.as_view(template_name='home.html')),
-    url(r'^whereami/', 'septajawn.views.map', name='map'),
+    url(r'^whereami/', TemplateView.as_view(template_name='map.html')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

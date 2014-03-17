@@ -1,5 +1,5 @@
 from django.views.generic import TemplateView
-from django.contrib.gis.utils import GeoIP
+from django.contrib.gis.geoip import GeoIP
 
 class MapView(TemplateView):
     template_name = "map.html"
