@@ -36,6 +36,16 @@
       command: "pip install {{ item }}"
       sudo: yes
       with_items:
-              - Django
+              - django-toolbelt
+              - django-bootstrap-form
               - south
               - virtualenv
+
+    - name: create virtualenv
+      command: "virtualenv /vagrant/{{ project_name }}/venv"
+
+    - name: activate virtualenv
+      command: "source /vagrant/{{ project_name }}/venv/bin/activate"
+
+    - name: start django server
+      command: "python /vagrant/{{ project_name }}/manage.py runserver 0.0.0.0:8000 &"
