@@ -28,6 +28,8 @@
         - binutils
         - python-gdal
 
+      # These pip packages should really be in a requirements.txt, 
+      # but this is easier during dev.
     - name: install django and supporting packages
       command: "pip install {{ item }}"
       sudo: yes
@@ -37,6 +39,7 @@
               - django-frontend
               - django-frontend-template
               - django-frontend-skeleton
+              - requests
               - south
               - virtualenv
               - geoip
