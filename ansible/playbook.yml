@@ -17,25 +17,39 @@
       with_items:
         - build-essential
         - git
-        - tree
-        - tmux
-        - vim
-        - curl
-        - gnupg
-        - zip
         - rsync
-        - wget
-        - rubygems
+        - htop
         - python-pip 
         - python-dev 
         - libpq-dev
-        - rbenv
-        - apache2
+        - geoip-bin
+        - python-geoip
+        - libgeoip-dev
+        - binutils
+        - python-gdal
 
     - name: install django and supporting packages
       command: "pip install {{ item }}"
       sudo: yes
       with_items:
-              - Django
+              - django-toolbelt
+              - django-bootstrap-form
+              - django-frontend
+              - django-frontend-template
+              - django-frontend-skeleton
               - south
               - virtualenv
+              - geoip
+
+    - name: collect Django static files
+      command: "python /vagrant/{{ project_name }}/manage.py collectstatic --noinput"
+
+#    - name: create virtualenv
+#      command: "virtualenv --system-site-packages /vagrant/{{ project_name }}/venv"
+#
+#    - name: activate virtualenv
+#      command: "source /vagrant/{{ project_name }}/venv/bin/activate"
+
+#    - name: start django server
+#      command: "python /vagrant/{{ project_name }}/manage.py runserver 0.0.0.0:8000"
+#      command: "python /vagrant/{{ project_name }}/manage.py runserver [::]:8000"

@@ -1,4 +1,5 @@
 # Django settings for septajawn project.
+import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -61,7 +62,8 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = ''
+#STATIC_ROOT = os.path.join(os.pardir + __file__, 'static')
+STATIC_ROOT = '/vagrant/septajawn/septajawn/templates'
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
@@ -111,6 +113,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    '/vagrant/septajawn/septajawn/templates',
 )
 
 INSTALLED_APPS = (
@@ -120,12 +123,17 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'djfrontend',
+    'djfrontend.skeleton',
+    'django.contrib.gis',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
 
+GEOIP_LOCATION = '/vagrant/septajawn/septajawn/geodata'
+GEOIP_PATH = '/vagrant/septajawn/septajawn/geodata'
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 
 # A sample logging configuration. The only tangible logging
