@@ -27,6 +27,8 @@
         - libgeoip-dev
         - binutils
         - python-gdal
+        - libmysqlclient-dev
+        - mysql-server
 
       # These pip packages should really be in a requirements.txt, 
       # but this is easier during dev.
@@ -39,6 +41,10 @@
               - django-frontend
               - django-frontend-template
               - django-frontend-skeleton
+              - djangorestframework
+              - markdown
+              - django-filter
+              - mysql-python
               - requests
               - south
               - virtualenv
