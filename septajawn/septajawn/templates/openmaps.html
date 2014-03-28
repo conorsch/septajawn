@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% load leaflet_tags %}
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<style type="text/css">
+html { height: 100% }
+body { height: 100%; margin: 0; padding: 0 }
+#map-canvas { height: 100% }
+</style>
+
+{% leaflet_js %}
+{% leaflet_css %}
+
+<script type="text/javascript">
+    function map_init_basic (map, options) {
+        map.locate({
+          setView: true, 
+          maxZoom: 16,
+        });
+       //L.marker([50.5, 30.5]).addTo(map);
+      function onLocationFound(e) {
+          var radius = Math.floor(e.accuracy / 2);
+
+          L.marker(e.latlng).addTo(map)
+              .bindPopup("You are within " + radius + " meters from this point").openPopup();
+
+          L.circle(e.latlng, radius).addTo(map);
+      }
+      map.on('locationfound', onLocationFound);
+    }
+</script>
+</head>
+<body>
+    {% leaflet_map "map-canvas" callback="window.map_init_basic" %}
+</body>
+</html>

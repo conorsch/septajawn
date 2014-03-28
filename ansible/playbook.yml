@@ -42,6 +42,7 @@
               - django-frontend-template
               - django-frontend-skeleton
               - djangorestframework
+              - django-leaflet
               - markdown
               - django-filter
               - mysql-python

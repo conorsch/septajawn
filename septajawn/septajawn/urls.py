@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     url(r'^whereami-server/', septajawn.findme.views.getLocation),
     url(r'^whereami-js/', TemplateView.as_view(template_name='map.html')),
     url(r'^whereami-gmaps/', TemplateView.as_view(template_name='gmaps.html')),
+    url(r'^whereami-openmaps/', TemplateView.as_view(template_name='openmaps.html')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

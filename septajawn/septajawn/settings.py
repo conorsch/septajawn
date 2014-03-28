@@ -127,6 +127,7 @@ INSTALLED_APPS = (
     'djfrontend.skeleton',
     'django.contrib.gis',
     'rest_framework',
+    'leaflet',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
