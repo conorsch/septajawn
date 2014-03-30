@@ -23,12 +23,15 @@ body { height: 100%; margin: 0; padding: 0 }
         });
 
         function displayStop(stopInfo) { 
-          console.log('GONNA PRINT SOME JSON');
-          console.log(stopInfo);
-
             var loc = L.latLng(stopInfo.lat, stopInfo.lng);
             L.marker(loc).addTo(map)
                 .bindPopup("<strong>Nearest stop: </strong>" + stopInfo.title).openPopup();
+        }
+
+        function displayVehicle(vehicleInfo) { 
+            var loc = L.latLng(vehicleInfo.lat, vehicleInfo.lng);
+            L.marker(loc).addTo(map)
+                .bindPopup("<strong>Trolley</strong>").openPopup();
         }
 
         function onLocationFound(e) {
@@ -40,7 +43,13 @@ body { height: 100%; margin: 0; padding: 0 }
             $.getJSON("http://petrichor:8000/septapy/route/34/nearest/stop", {
                lat: e.latlng.lat,
                lng: e.latlng.lng,
-               }).then(displayStop, function() { alert("AJAX location update failed");});
+               }).then(displayStop, function() { alert("AJAX user location update failed");});
+
+            $.getJSON("http://petrichor:8000/septapy/route/34/nearest/vehicle", {
+               lat: e.latlng.lat,
+               lng: e.latlng.lng,
+               }).then(displayVehicle, function() { alert("AJAX trolley location update failed");});
+        
         }
 
         map.on('locationfound', onLocationFound);

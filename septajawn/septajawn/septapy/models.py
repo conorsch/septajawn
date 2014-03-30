@@ -35,6 +35,11 @@ class Route(models.Model):
         stops.sort(key=lambda s: self.getDistance(s.latitude, s.longitude, latitude, longitude))
         return stops[0]
 
+    def findNearestVehicle(self, latitude, longitude):
+        vehicles = self.vehicles()
+        vehicles.sort(key=lambda v: self.getDistance(v.latitude, v.longitude, latitude, longitude))
+        return vehicles[0]
+
     def getDistance(self, lat1, long1, lat2, long2):
         # Convert latitude and longitude to 
         # spherical coordinates in radians.
@@ -94,13 +99,14 @@ Location: %(lat)s, %(long)s
 class Vehicle(object):
     def __init__(self, jsonArgs, route=None):
 
-        self.latitude = jsonArgs['lat']
-        self.longitude = jsonArgs['lng']
+        self.latitude = float(jsonArgs['lat'])
+        self.longitude = float(jsonArgs['lng'])
         self.coords = (self.latitude, self.longitude)
         self.vehicleID = jsonArgs['VehicleID']
         self.blockID = jsonArgs['BlockID']
         self.direction = jsonArgs['Direction']
         self.label = jsonArgs['label']
+        self.title = self.label
         self.offset = jsonArgs['Offset']
         self.destination = jsonArgs['destination']
         self.route = route
