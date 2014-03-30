@@ -11,6 +11,7 @@ body { height: 100%; margin: 0; padding: 0 }
 
 {% leaflet_js %}
 {% leaflet_css %}
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
 <script type="text/javascript">
@@ -27,19 +28,19 @@ body { height: 100%; margin: 0; padding: 0 }
 
             var loc = L.latLng(stopInfo.lat, stopInfo.lng);
             L.marker(loc).addTo(map)
-                .bindPopup(stopInfo.title).openPopup();
+                .bindPopup("<strong>Nearest stop: </strong>" + stopInfo.title).openPopup();
         }
 
         function onLocationFound(e) {
             var radius = Math.floor(e.accuracy / 2);
             L.marker(e.latlng).addTo(map)
-                .bindPopup("You are within " + radius + " meters from this point").openPopup();
+                .bindPopup("You are here. (+/- " + radius + "m)").openPopup();
             L.circle(e.latlng, radius).addTo(map);
 
             $.getJSON("http://petrichor:8000/septapy/route/34/nearest/stop", {
                lat: e.latlng.lat,
                lng: e.latlng.lng,
-               }).done(displayStop);
+               }).then(displayStop, function() { alert("AJAX location update failed");});
         }
 
         map.on('locationfound', onLocationFound);
