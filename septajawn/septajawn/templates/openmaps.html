@@ -11,27 +11,43 @@ body { height: 100%; margin: 0; padding: 0 }
 
 {% leaflet_js %}
 {% leaflet_css %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
 <script type="text/javascript">
+
     function map_init_basic (map, options) {
         map.locate({
           setView: true, 
           maxZoom: 16,
         });
-       //L.marker([50.5, 30.5]).addTo(map);
-      function onLocationFound(e) {
-          var radius = Math.floor(e.accuracy / 2);
 
-          L.marker(e.latlng).addTo(map)
-              .bindPopup("You are within " + radius + " meters from this point").openPopup();
+        function displayStop(stopInfo) { 
+          console.log('GONNA PRINT SOME JSON');
+          console.log(stopInfo);
 
-          L.circle(e.latlng, radius).addTo(map);
-      }
-      map.on('locationfound', onLocationFound);
+            var loc = L.latLng(stopInfo.lat, stopInfo.lng);
+            L.marker(loc).addTo(map)
+                .bindPopup(stopInfo.title).openPopup();
+        }
+
+        function onLocationFound(e) {
+            var radius = Math.floor(e.accuracy / 2);
+            L.marker(e.latlng).addTo(map)
+                .bindPopup("You are within " + radius + " meters from this point").openPopup();
+            L.circle(e.latlng, radius).addTo(map);
+
+            $.getJSON("http://petrichor:8000/septapy/route/34/nearest/stop", {
+               lat: e.latlng.lat,
+               lng: e.latlng.lng,
+               }).done(displayStop);
+        }
+
+        map.on('locationfound', onLocationFound);
     }
 </script>
 </head>
 <body>
     {% leaflet_map "map-canvas" callback="window.map_init_basic" %}
+</form>
 </body>
 </html>

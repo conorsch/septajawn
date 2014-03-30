@@ -7,12 +7,19 @@ class Route(models.Model):
     route = models.SlugField()
     identifier = models.SlugField()
 
+    def __init__(self, identifier=None):
+        self.identifier = str(identifier)
+
     def __unicode__(self):
         return "Route " + self.identifier
 
     def vehicles(self):
         vehicleURL = 'http://www3.septa.org/transitview/bus_route_data/' + self.identifier
-        r = requests.get(vehicleURL)
+        try:
+            r = requests.get(vehicleURL)
+        except:
+            raise Exception("FAILED GET ON VEHICLES FOR ROUTE '%s'" % self.identifier)
+
         j = r.json()
         vehicles = j[j.keys()[0]]
         return [Vehicle(v, route=self.identifier) for v in vehicles]
@@ -23,11 +30,9 @@ class Route(models.Model):
         j = r.json()
         return [Stop(s, route=self.identifier) for s in j]
 
-    def findNearestStop(self, latitude=None, longitude=None):
-        latitude = 20
-        longitude = -10
+    def findNearestStop(self, latitude, longitude):
         stops = self.stops()
-        stops.sort(key=lambda s: self.getDistance(s.latitude, s.longitude, latitude, longitude), reverse=True)
+        stops.sort(key=lambda s: self.getDistance(s.latitude, s.longitude, latitude, longitude))
         return stops[0]
 
     def getDistance(self, lat1, long1, lat2, long2):
@@ -67,6 +72,7 @@ class Stop(object):
         self.coords = (self.latitude, self.longitude)
         self.stopID = jsonArgs['stopid']
         self.name = jsonArgs['stopname']
+        self.title = self.name
         self.route = route
 
     def __str__(self):
@@ -99,7 +105,7 @@ class Vehicle(object):
         self.destination = jsonArgs['destination']
         self.route = route
 
-    def __str__(self):
+    def __unicode__(self):
         representation = """\
 Route: %(route)s
 Current location: %(lat)s, %(long)s
@@ -114,9 +120,3 @@ Next stop: %(destination)s
                 }
 
         return representation
-
-route = Route(34)
-vehicles = route.vehicles()
-print vehicles
-v = vehicles[0]
-print v
