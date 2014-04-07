@@ -28,7 +28,7 @@ def getNearestStop(request, route=None, lat=None, lng=None):
     # form data comes in as unicode via GET, so convert to float
     lat = float(request.GET.get('lat'))
     lng = float(request.GET.get('lng'))
-    print "LAT LONG ARE: %s %s" % (lat, lng)
+    #print "LAT LONG ARE: %s %s" % (lat, lng)
 
     n = r.findNearestStop(lat, lng)
     d = dict(title=n.title, lat=n.latitude, lng=n.longitude)
@@ -45,7 +45,9 @@ def getNearestTrolley(request, route=None, lat=None, lng=None):
     lng = float(request.GET.get('lng'))
 
     n = r.findNearestVehicle(lat, lng)
-    d = dict(title=n.title, lat=n.latitude, lng=n.longitude)
+
+    # poor man's object serialization right here. 
+    d = dict(direction=n.direction, title=n.title, lat=n.latitude, lng=n.longitude)
     j = json.dumps(d)
 
     return HttpResponse(j, mimetype='application/json')

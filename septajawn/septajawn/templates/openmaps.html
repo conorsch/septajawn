@@ -31,7 +31,7 @@ body { height: 100%; margin: 0; padding: 0 }
         function displayVehicle(vehicleInfo) { 
             var loc = L.latLng(vehicleInfo.lat, vehicleInfo.lng);
             L.marker(loc).addTo(map)
-                .bindPopup("<strong>Trolley</strong>").openPopup();
+                .bindPopup("<p><strong>Trolley " + vehicleInfo.title + "</strong></p><p>Heading: " + vehicleInfo.direction + "</p>").openPopup();
         }
 
         function onLocationFound(e) {
