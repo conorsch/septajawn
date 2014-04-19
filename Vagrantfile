@@ -9,22 +9,23 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define :septajawn do |t|
   end
 
-  # Canonical builds nightly Vagrant images for Ubuntu: http://cloud-images.ubuntu.com/vagrant/
-  # Still using 12.04 LTS, since 14.04 LTS isn't ready yet.
-  config.vm.box = "precise64"
-  config.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box"
+  config.vm.provider :virtualbox do |vb, override|
+    # Canonical builds nightly Vagrant images for Ubuntu: http://cloud-images.ubuntu.com/vagrant/
+    # Still using 12.04 LTS, since 14.04 LTS isn't ready yet.
+    config.vm.box = "precise64"
+    config.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box"
 
-  config.vm.network :forwarded_port, guest: 8000, host: 8000
-  config.vm.network :private_network, ip: "192.168.33.33"
+    config.vm.network :forwarded_port, guest: 8000, host: 8000
+    config.vm.network :private_network, ip: "192.168.33.33"
+
+  end
 
   config.vm.provider :lxc do |lxc, override|
-
-    # The author of vagrant-lxc maintains base boxses at https://github.com/fgrehm/vagrant-lxc/wiki/Base-boxes
-    override.vm.box = "raring64-lxc"
-    override.vm.box_url = "http://bit.ly/vagrant-lxc-raring64-2013-10-23"
-    # Same effect as as 'customize ["modifyvm", :id, "--memory", "1024"]' for VirtualBox
-    #lxc.customize 'cgroup.memory.limit_in_bytes', '2014M'
-
+      # The author of vagrant-lxc maintains base boxses at https://github.com/fgrehm/vagrant-lxc/wiki/Base-boxes
+      override.vm.box = "raring64-lxc"
+      override.vm.box_url = "http://bit.ly/vagrant-lxc-raring64-2013-10-23"
+      # Same effect as as 'customize ["modifyvm", :id, "--memory", "1024"]' for VirtualBox
+      #lxc.customize 'cgroup.memory.limit_in_bytes', '2014M'
   end
 
   config.vm.provider :aws do |aws, override|
@@ -54,22 +55,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   end
 
-  config.vm.provider :virtualbox do |vb, override|
-
-    # Enable vagrant-cachier support, so packages aren't downloaded for every provisioning.
-    config.cache.auto_detect = true
-    config.cache.enable :apt
-    config.cache.enable :chef
-
-    vb.customize ["modifyvm", :id, "--memory", "1024"]
-    vb.customize ["modifyvm", :id, "--cpus", "2"]
-    vb.name = "djangobox"
-
-  end
-
   config.vm.provision :ansible do |ansible|
      ansible.playbook = "ansible/playbook.yml"
-     ansible.inventory_file = "ansible/hosts" 
+     ansible.inventory_path = "ansible/hosts"
      ansible.extra_vars = { :project_name => "septajawn" }
      ansible.verbose = "extra"
   end

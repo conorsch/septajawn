@@ -1,5 +1,5 @@
 ---
-- hosts: django-webserver  
+- hosts: septajawn 
 
   tasks:
 
