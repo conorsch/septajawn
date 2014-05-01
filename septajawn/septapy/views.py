@@ -1,5 +1,4 @@
 # Create your views here.
-from django.contrib.gis.geoip import GeoIP
 from django.http import HttpResponse
 from septajawn.septapy.models import Route
 import json
