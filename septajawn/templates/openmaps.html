@@ -40,12 +40,12 @@ body { height: 100%; margin: 0; padding: 0 }
                 .bindPopup("You are here. (+/- " + radius + "m)").openPopup();
             L.circle(e.latlng, radius).addTo(map);
 
-            $.getJSON("http://petrichor:8000/septapy/route/34/nearest/stop", {
+            $.getJSON("{{request.META.SERVER_NAME}}/septapy/route/34/nearest/stop", {
                lat: e.latlng.lat,
                lng: e.latlng.lng,
                }).then(displayStop, function() { alert("AJAX user location update failed");});
 
-            $.getJSON("http://petrichor:8000/septapy/route/34/nearest/vehicle", {
+            $.getJSON("{{request.META.SERVER_NAME.}}/septapy/route/34/nearest/vehicle", {
                lat: e.latlng.lat,
                lng: e.latlng.lng,
                }).then(displayVehicle, function() { alert("AJAX trolley location update failed");});
