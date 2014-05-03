@@ -5,21 +5,6 @@ import json
 import requests
 
 
-def showRoute(request, route=None):
-
-    r = Route(route)
-
-    message = """
-    %s 
-    Vehicles are:
-    """ % r
-
-    for v in r.vehicles():
-        message += unicode(v)
-        message += '\n' 
-
-    return HttpResponse(message)
-
 def getNearestStop(request, route=None, lat=None, lng=None):
 
     r = Route(route)
