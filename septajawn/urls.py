@@ -13,9 +13,9 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$', TemplateView.as_view(template_name='openmaps.html')),
     url(r'^whereami/?$', TemplateView.as_view(template_name='openmaps.html')),
-    url(r'^septapy/route/(?P<route>\d{0,3})/nearest/stop', septajawn.views.getNearestStop),
-    url(r'^septapy/route/(?P<route>\d{0,3})/nearest/vehicle', septajawn.views.getNearestTrolley),
-    url(r'^septapy/route/(?P<route>\d{0,3})/?$', septajawn.views.showRoute),
+    url(r'^route/(?P<route>\d{0,3})/nearest/stop', septajawn.views.getNearestStop),
+    url(r'^route/(?P<route>\d{0,3})/nearest/vehicle', septajawn.views.getNearestTrolley),
+    url(r'^route/(?P<route>\d{0,3})/?$', septajawn.views.showRoute),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
